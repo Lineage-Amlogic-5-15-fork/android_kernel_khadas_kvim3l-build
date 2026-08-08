@@ -2,12 +2,15 @@
 
 load("//vendor/amlogic/kernel:kernel_platform.bzl", "amlogic_kernel_platform")
 load("//vendor/amlogic/gpu-modules/bifrost:defs.bzl", "mali_bifrost_module")
+load("//vendor/amlogic/dhd-driver:defs.bzl", "bcmdhd_591_sdio_module")
 load("//vendor/amlogic/media-modules:defs.bzl", "media_modules_module")
 load(":modules.bzl", "COMMON_DRIVERS_MODULES", "GKI_MODULES_REMOVE", "KVIM3L_MODULES", "MODULES_OUT_REMOVE", "SYSTEM_DLKM_MODULES")
 
 package(
     default_visibility = ["//visibility:public"],
 )
+
+bcmdhd_591_sdio_module(name = "wlan_ap6356", kernel_build = ":kvim3l")
 
 mali_bifrost_module(name = "gpu_bifrost", kernel_build = ":kvim3l")
 
@@ -26,6 +29,7 @@ amlogic_kernel_platform(
     build_config = "//vendor/amlogic/kernel:build.config.kvim3l.bazel",
     kmi_symbol_list = "//vendor/amlogic/kernel:android/abi_gki_aarch64_amlogic",
     kernel_modules = [
+        ":wlan_ap6356",
         ":gpu_bifrost",
         ":media",
     ],
