@@ -19,6 +19,7 @@ amlogic_kernel_platform(
         "kvim3l.dtb",
         "android_overlay_dt.dtbo",
     ],
+    extra_image_outs = ["Image.gz"],
     module_outs = [m for m in KVIM3L_MODULES + COMMON_DRIVERS_MODULES + SYSTEM_DLKM_MODULES if m not in MODULES_OUT_REMOVE],
     gki_modules_remove = GKI_MODULES_REMOVE + SYSTEM_DLKM_MODULES,
     system_dlkm_modules_load = ["kernel/" + m for m in SYSTEM_DLKM_MODULES] + [""],
